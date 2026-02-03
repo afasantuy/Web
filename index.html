@@ -4,115 +4,89 @@
 <title>Afa Cinwo</title>
 
 <style>
-body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:black;
-overflow:hidden;
-font-family:Arial;
-color:white;
+body {
+    margin:0;
+    background:black;
+    color:#00ff00;
+    font-family:monospace;
+    text-align:center;
+    overflow:hidden;
 }
 
-/* BACKGROUND */
-.bg{
-position:fixed;
-width:100%;
-height:100%;
-background:radial-gradient(circle,#00ff6633,transparent);
-animation:pulse 4s infinite;
+canvas {
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
 }
 
-@keyframes pulse{
-0%{opacity:.3}
-50%{opacity:.8}
-100%{opacity:.3}
+h1 {
+    font-size:40px;
+    animation: glitch 1s infinite;
 }
 
-/* CARD */
-.card{
-z-index:1;
-background:rgba(255,255,255,.05);
-padding:40px;
-border-radius:20px;
-box-shadow:0 0 30px #00ff66;
-text-align:center;
-backdrop-filter:blur(8px);
+@keyframes glitch {
+    0% {text-shadow:2px 2px red;}
+    50% {text-shadow:-2px -2px blue;}
+    100% {text-shadow:2px 2px lime;}
 }
 
-/* FOTO */
-img{
-width:150px;
-border-radius:50%;
-box-shadow:0 0 20px #00ff66;
-}
-
-/* TYPING */
-.typing{
-border-right:2px solid #00ff66;
-display:inline-block;
-padding-right:5px;
-animation:blink 1s infinite;
-}
-
-@keyframes blink{
-50%{border-color:transparent}
-}
-
-/* WA BUTTON */
-.wa{
-margin-top:20px;
-padding:15px 35px;
-background:#00ff66;
-border:none;
-border-radius:30px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 0 15px #00ff66;
-transition:.3s;
-}
-
-.wa:hover{
-transform:scale(1.15);
-box-shadow:0 0 40px #00ff66;
+button {
+    padding:12px 25px;
+    background:black;
+    border:1px solid #00ff00;
+    color:#00ff00;
+    font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<canvas id="matrix"></canvas>
 
-<div class="card">
+<h1>Afa Cinwo</h1>
 
-<img src="Foto.png">
-
-<h1><span class="typing" id="text"></span></h1>
-
-<p>Terminal aktif • Mode hacker ON</p>
+<p id="typing"></p>
 
 <a href="https://wa.me/6285891786542" target="_blank">
-<button class="wa">Chat WhatsApp</button>
+<button>CONTACT ROOT</button>
 </a>
 
-</div>
-
 <script>
-const text="Afa Cinwo 😎";
+// typing
+let text = "root@afacinwo:~# Access Granted...";
 let i=0;
+setInterval(()=>{
+ if(i<text.length){
+ document.getElementById("typing").innerHTML+=text[i];
+ i++;
+ }
+},80);
 
-function ketik(){
-if(i<text.length){
-document.getElementById("text").innerHTML+=text.charAt(i);
-i++;
-setTimeout(ketik,120);
-}
-}
+// matrix
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+let letters="01AFACINWO".split("");
+let font=16;
+let drops=[];
+for(let i=0;i<canvas.width/font;i++) drops[i]=1;
 
-ketik();
+function draw(){
+ ctx.fillStyle="rgba(0,0,0,.05)";
+ ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle="#0f0";
+ ctx.font=font+"px monospace";
+ for(let i=0;i<drops.length;i++){
+ let text=letters[Math.floor(Math.random()*letters.length)];
+ ctx.fillText(text,i*font,drops[i]*font);
+ if(drops[i]*font>canvas.height && Math.random()>0.975) drops[i]=0;
+ drops[i]++;
+ }
+}
+setInterval(draw,33);
 </script>
 
 </body>
