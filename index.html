@@ -4,127 +4,99 @@
 <title>Afa Cinwo</title>
 
 <style>
-body {
-    margin:0;
-    background:black;
-    color:#00ff00;
-    font-family:monospace;
-    text-align:center;
-    overflow:hidden;
+body{
+margin:0;
+background:black;
+color:#00ff00;
+font-family:monospace;
+text-align:center;
+overflow:hidden;
 }
 
 canvas{
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:-1;
+position:fixed;
+inset:0;
+z-index:-10;
+pointer-events:none;
 }
 
 button{
- margin:10px;
-}
-    
-
-h1 {
-    font-size:40px;
-    animation: glitch 1s infinite;
-}
-
-@keyframes glitch {
-    0% {text-shadow:2px 2px red;}
-    50% {text-shadow:-2px -2px blue;}
-    100% {text-shadow:2px 2px lime;}
+padding:12px 25px;
+margin:8px;
+background:black;
+border:1px solid #00ff00;
+color:#00ff00;
+font-weight:bold;
+border-radius:10px;
 }
 
-button {
-    padding:12px 25px;
-    background:black;
-    border:1px solid #00ff00;
-    color:#00ff00;
-    font-weight:bold;
+button:hover{
+box-shadow:0 0 15px #00ff00;
+transform:scale(1.05);
+}
+
+h1{
+font-size:40px;
+text-shadow:0 0 10px lime;
+}
+
+.card{
+margin-top:80px;
 }
 </style>
 </head>
+
 <body>
 
-
-
-<br><br>
-
-<a href="https://www.instagram.com/afa_ciwoo/?hl=en" target="_blank">
-<button>Instagram</button>
-</a>
-
-<br><br>
-
-<a href="https://www.facebook.com/afa.fingerstyle.3" target="_blank">
-<button>Facebook</button>
-</a>
-    <canvas id="matrix"></canvas>
-    
-<body>
+<div class="card">
 
 <h1>Afa Cinwo</h1>
 
-<p>Saya terima jasa bikin website simple / bio link</p>
-<p>Harga mulai 50K</p>
-<p>Masih belajar, harga bisa nego</p>
-<p>Respon cepat via WhatsApp</p>
-<p>Cepat • Murah • Bisa dari HP</p>
+<p>Jasa bikin website simple / bio link</p>
+<p>Harga mulai 50K • Bisa nego</p>
+<p>Order via WhatsApp</p>
 
-<br>
+<a href="https://wa.me/6285891786542?text=Halo%20saya%20mau%20order%20website" target="_blank">
+<button>ORDER SEKARANG</button>
+</a>
 
-<a href="https://www.instagram.com/afa_ciwoo/?hl=en" target="_blank">
+<br><br>
+
+<a href="https://www.instagram.com/afa_ciwoo/" target="_blank">
 <button>Instagram</button>
 </a>
 
-<br><br>
-
-<a href="https://www.facebook.com/afa.fingerstyle.3" target="_blank">
+<a href="https://m.facebook.com/afa.fingerstyle.3" target="_blank">
 <button>Facebook</button>
 </a>
 
-<br><br>
-
-<a href="https://wa.me/6285891786542">
-<button>Order Sekarang</button>
-</a>
+</div>
 
 <canvas id="matrix"></canvas>
 
-</body>
 <script>
-// typing
-let text = "root@afacinwo:~# Access Granted...";
-let i=0;
-setInterval(()=>{
- if(i<text.length){
- document.getElementById("typing").innerHTML+=text[i];
- i++;
- }
-},80);
-
-// matrix
-const canvas=document.getElementById("matrix");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-let letters="01AFACINWO".split("");
-let font=16;
+const c=document.getElementById("matrix");
+const ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+let chars="01AFAHACKER";
+chars=chars.split("");
+let font=14;
+let cols=c.width/font;
 let drops=[];
-for(let i=0;i<canvas.width/font;i++) drops[i]=1;
+for(let x=0;x<cols;x++)drops[x]=1;
 
 function draw(){
- ctx.fillStyle="rgba(0,0,0,.05)";
- ctx.fillRect(0,0,canvas.width,canvas.height);
- ctx.fillStyle="#0f0";
- ctx.font=font+"px monospace";
- for(let i=0;i<drops.length;i++){
- let text=letters[Math.floor(Math.random()*letters.length)];
- ctx.fillText(text,i*font,drops[i]*font);
- if(drops[i]*font>canvas.height && Math.random()>0.975) drops[i]=0;
- drops[i]++;
- }
+ctx.fillStyle="rgba(0,0,0,.05)";
+ctx.fillRect(0,0,c.width,c.height);
+ctx.fillStyle="#0F0";
+ctx.font=font+"px monospace";
+for(let i=0;i<drops.length;i++){
+let text=chars[Math.floor(Math.random()*chars.length)];
+ctx.fillText(text,i*font,drops[i]*font);
+if(drops[i]*font>c.height&&Math.random()>0.975)drops[i]=0;
+drops[i]++;
+}
 }
 setInterval(draw,33);
 </script>
